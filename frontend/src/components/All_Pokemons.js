@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import Button from "@mui/material/Button";
 import Loader from "./Loader";
 
-const AllInterviews = () => {
+const AllPokemons = () => {
   const [isLoading, setisLoading] = useState(true);
   const [pokemons, setPokemons] = useState([]);
   const [isloggedIn, setisloggedIn] = useState(false);
@@ -82,4 +82,4 @@ const AllInterviews = () => {
   );
 };
 
-export default AllInterviews;
+export default AllPokemons;

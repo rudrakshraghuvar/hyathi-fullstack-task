@@ -30,23 +30,36 @@ const Listitems = ({ item }) => {
   const { name, type, breed, age, healthStatus } = item;
   const navigate = useNavigate();
   const [open, setOpen] = React.useState();
+  const user = localStorage.getItem("userInfo");
+  const currUser = JSON.parse(user);
+  const uid = currUser._id;
+  console.log(name);
   const handleOpen = () => {
     setOpen(true);
   };
+
+
   const adoptHandle = async () => {
-    const data = {
-      name,
-      type,
-      breed,
-      age,
-      healthStatus,
-    };
-    console.log(data);
-    const user = localStorage.getItem("userInfo");
-    const currUser = JSON.parse(user);
-    const id = currUser._id;
-    console.log(id);
-    await axios.put(`http://localhost:5000/api/users/${id}`, data);
+
+    try {
+      const user = localStorage.getItem("userInfo");
+      const jData = JSON.parse(user);
+      const uid = jData._id;
+
+      const data = {
+        name,
+        type,
+        breed,
+        age,
+        healthStatus,
+        uid,
+      };
+      // console.log(data);
+      const res = await axios.post("pokemon/adopt", data);
+      alert("Pokemon adopted successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleClose = () => {
     setOpen(false);
@@ -56,9 +69,9 @@ const Listitems = ({ item }) => {
       <div className="column">
         <div className="card">
           <h3>{name} </h3>
-          <p>Pokemon Type : {type}</p>
+          <p>Pokoem Type : {type}</p>
           <p>Pokemon Breed : {breed}</p>
-          <p>Pokemon Age : {age}</p>
+          <p>Pokoem Age : {age}</p>
           <p>Pokemon Health Status : {healthStatus} </p>
           <button type="submit" onClick={adoptHandle}>
             Adopt Me

@@ -22,11 +22,13 @@ export default function Navbar() {
         <Link to="/">
           <div className="btn nav-item">All Pokemons</div>
         </Link>
-        <Link to="/addInterview">
+        <Link to="/addPokemon">
+          <div className="btn nav-item">Add Pokemons</div>
+        </Link>
+        <Link to="/myPokemons">
           <div className="btn nav-item">My Pokemons</div>
         </Link>
       </div>
-
       <div className="nav-right">
         <div className="btn nav-item" onClick={handleLogout}>
           Logout

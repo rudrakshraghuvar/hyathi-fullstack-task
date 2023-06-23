@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
+const pokemon = require("../models/pokemon");
 const { User } = require("../models/users");
 const bcrypt = require("bcrypt");
 router.post("/", async (req, res) => {
@@ -28,6 +30,57 @@ router.get("/", async (req, res) => {
     console.log(error);
     res.status(500).send({ error: "Server Error" });
   }
+});
+
+router.put("/", async (req, res) => {
+  // var pid = req.params.id;
+  const { uid, pid } = req.body;
+  console.log(pid, uid);
+  console.log("hi");
+  try {
+    const pmid = new mongoose.Types.ObjectId(pid);
+    console.log(pmid);
+    const doc = await User.findOne({
+      pokemonList: pmid,
+    });
+    if (doc) {
+      console.log("Exists");
+      return res.status(400).send("Already Exists");
+    } else {
+      try {
+        await User.updateOne(
+          { _id: uid },
+          {
+            $push: {
+              pokemonList: pmid,
+            },
+          }
+        );
+        return res.status(200).send("Added Successfully");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // User.find((err, doc) => {
+    //   if (err)
+    //     console.log(err);
+    //   else {
+    //     const plist = doc.pokemonList;
+    //     console.log(plist);
+    //   }
+    // })
+  } catch (err) {
+    console.log(err);
+  }
+  // console.log(User);
+  // const res = await User.pokemonList.findById(pmid);
+  // if (red.length > 0) {
+  //   return res.status(400).send("Already Exists");
+  // else
+  // {
+  //
+  // catch (error) {
+  // }
 });
 
 module.exports = router;

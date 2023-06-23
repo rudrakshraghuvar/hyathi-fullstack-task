@@ -81,7 +81,7 @@ const Login = () => {
           </form>
         </div>
         <div className="lright">
-          <h2>Pokemon Adoption App</h2>
+          <h2>Pokenmon Adoption App</h2>
           <Link to="/signup">
             <button type="button" className="reg_btn">
               New Here

@@ -31,7 +31,6 @@ const Add_Pokemon = () => {
       type,
       breed,
       age,
-      healthStatus,
     };
     try {
       await axios.post("http://localhost:5000/pokemon", data);
@@ -97,17 +96,7 @@ const Add_Pokemon = () => {
               id="age"
               required
             />
-            <label for="health">Health Status</label>
-            <input
-              value={healthStatus}
-              placeholder="Enter Health Status of Pokemon"
-              onChange={(e) => {
-                setHealthStatus(e.target.value);
-              }}
-              type="text"
-              id="health"
-              required
-            />
+            
 
             <button type="submit" onClick={submitHandler}>
               Add Pokemon

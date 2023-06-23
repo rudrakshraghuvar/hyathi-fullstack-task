@@ -17,8 +17,8 @@ const PokemonSchema = new mongoose.Schema({
     required: true,
   },
   healthStatus: {
-    type: String,
-    required: true,
+    type: Number,
+    default :100,
   },
 });
 
