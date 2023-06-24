@@ -59,6 +59,7 @@ const Listitems = ({ item }) => {
       alert("Pokemon adopted successfully");
     } catch (error) {
       console.log(error);
+      alert(`${error.response.data.message}`);
     }
   };
   const handleClose = () => {

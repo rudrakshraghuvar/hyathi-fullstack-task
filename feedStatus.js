@@ -12,34 +12,36 @@ const feedStatus = async () => {
             }
             if (item.isFeeded === true) {
                 console.log("abcd");
-                const fun = async() => {
-                await adoptedPokemons.updateOne({
-                    _id: item._id,
-                },
-                {
-                    $set: {
-                        isFeeded: false,
-                    }
-                })
+                // const currHealth = item.healthStatus + 100;
+                const fun = async () => {
+                    await adoptedPokemons.updateOne({
+                        _id: item._id,
+                    },
+                        {
+                            $set: {
+                                isFeeded: false,
+                                // healthStatus: currHealth,
+                            }
+                        })
                 }
                 fun();
             }
-            else if (item.isFeeded===false) {
+            else if (item.isFeeded === false) {
                 const currHealth = item.healthStatus - 10;
                 console.log(typeof currHealth);
                 console.log("efgh");
                 const fun2 = async () => {
                     await adoptedPokemons.updateOne({
-                    _id: item._id,
-                },
-                {
-                    $set: {
-                        healthStatus: item.healthStatus-10,
-                    }
-                })
-                   
-                } 
-                 fun2();
+                        _id: item._id,
+                    },
+                        {
+                            $set: {
+                                healthStatus: item.healthStatus - 10,
+                            }
+                        })
+
+                }
+                fun2();
             }
         }
         )

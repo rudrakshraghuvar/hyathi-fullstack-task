@@ -27,7 +27,7 @@ const AdoptedPokemonSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Pokemon = mongoose.model(
+module.exports = AdoptedPokemon = mongoose.model(
   "AdoptedPokemon",
   AdoptedPokemonSchema
 );

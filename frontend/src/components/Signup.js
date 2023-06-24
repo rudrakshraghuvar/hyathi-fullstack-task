@@ -16,10 +16,11 @@ const Signup = () => {
     try {
       // console.log(data);
       const formdata = { name, email, password };
+      // const body = JSON.stringify(formdata);
       console.log(formdata);
       if (name && email && password) {
         await axios.post(
-          "http://localhost:5000/api/users",
+          "/api/users",
           formdata,
           {
             headers: {
@@ -32,8 +33,8 @@ const Signup = () => {
       alert("Registration Successful");
       navigate("/login");
     } catch (error) {
-      alert(`${error.message}`);
       console.log(error);
+      alert(`${error.response.data.message}`);
     }
   };
   return (

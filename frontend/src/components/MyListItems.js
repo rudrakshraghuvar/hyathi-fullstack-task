@@ -52,6 +52,7 @@ const MyListItem = ({ item }) => {
       alert("Pokemon feeded successfully");
     } catch (error) {
       console.log(error);
+      alert(`${error.response.data.message}`);
     }
   };
   const handleClose = () => {

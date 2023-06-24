@@ -33,11 +33,12 @@ const Add_Pokemon = () => {
       age,
     };
     try {
-      await axios.post("http://localhost:5000/pokemon", data);
+      await axios.post("pokemon", data);
       alert("Pokemon Added Successfully");
       navigate("/");
     } catch (error) {
       console.log(error);
+      alert(`${error.response.data.message}`);
     }
   };
   return (
@@ -96,7 +97,7 @@ const Add_Pokemon = () => {
               id="age"
               required
             />
-            
+
 
             <button type="submit" onClick={submitHandler}>
               Add Pokemon

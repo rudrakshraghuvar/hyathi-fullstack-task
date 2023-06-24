@@ -3,24 +3,41 @@ const mongoose = require("mongoose");
 const pokemon = require("../models/pokemon");
 const { User } = require("../models/users");
 const bcrypt = require("bcrypt");
+
+
+// @route POST /api/users
+// @description Create New User
+// @acess PUBLIC
 router.post("/", async (req, res) => {
   try {
+    const { name, email } = req.body;
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      alert("User already exis");
       return res.status(409).send({ message: "User already exist" });
     }
     const salt = bcrypt.genSalt(Number(process.env.SALT));
-    const hashPassword = await bcrypt.hash(req.body.password, 10);
-    await new User({ ...req.body, password: hashPassword }).save();
-    console.log(req.body);
-    res.status(201).send({ message: "User created successfully." });
+    const password = await bcrypt.hash(req.body.password, 10);
+    const newUser = new User({
+      name,
+      email,
+      password,
+    });
+    console.log(newUser);
+    console.log("hi");
+    const result = await newUser.save();
+    console.log(result.data);
+    res.status(200).send({ message: "User created successfully." });
     console.log("Registration Successfull");
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" });
+    console.log(error);
+    res.status(500).send({ message: "User Already Exist" });
   }
 });
 
+
+// @route GET /api/users
+// @description Get All User Details
+// @acess PUBLIC
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
@@ -32,6 +49,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+// @route PUT /api/users
+// @description Update User's Pokemon Lisst
+// @acess PUBLIC
 router.put("/", async (req, res) => {
   // var pid = req.params.id;
   const { uid, pid } = req.body;
@@ -61,26 +82,10 @@ router.put("/", async (req, res) => {
         console.log(error);
       }
     }
-    // User.find((err, doc) => {
-    //   if (err)
-    //     console.log(err);
-    //   else {
-    //     const plist = doc.pokemonList;
-    //     console.log(plist);
-    //   }
-    // })
+
   } catch (err) {
     console.log(err);
   }
-  // console.log(User);
-  // const res = await User.pokemonList.findById(pmid);
-  // if (red.length > 0) {
-  //   return res.status(400).send("Already Exists");
-  // else
-  // {
-  //
-  // catch (error) {
-  // }
 });
 
 module.exports = router;

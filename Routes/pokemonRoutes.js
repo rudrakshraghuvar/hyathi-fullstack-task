@@ -7,8 +7,8 @@ const db = mongoose.connection;
 // const { User } = require("../models/users");
 const router = express.Router();
 
-// @route GET /interview
-// @description All interviews
+// @route GET /pokemon
+// @description All pokemons
 // @acess PUBLIC
 router.get("/", async (req, res) => {
   try {
@@ -19,6 +19,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+// @route GET /pokemon/adoptedPokemons
+// @description Adopted Pokemons
+// @acess PUBLIC
 router.get("/adoptedPokemons", async (req, res) => {
   try {
     const Adoptedpokemons = await adoptedPokemons.find();
@@ -27,8 +31,9 @@ router.get("/adoptedPokemons", async (req, res) => {
     res.status(500).send({ msg: "Server Error" });
   }
 });
+
 // @route POST pokemon/myPokemons
-// @description My interviews
+// @description My Pokemons
 // @acess PUBLIC
 
 router.post("/myPokemons", async (req, res) => {
@@ -46,6 +51,10 @@ router.post("/myPokemons", async (req, res) => {
   }
 });
 
+
+// @route POST pokemon/gwtMyPokemons
+// @description Get My Pokemons
+// @acess PUBLIC
 router.post("/getMyPokemons", async (req, res) => {
   try {
     const id = req.body.currId;
@@ -60,9 +69,20 @@ router.post("/getMyPokemons", async (req, res) => {
   
 });
 
+// @route POST pokemon/feed
+// @description Feed Pokemons
+// @acess PUBLIC
 router.put("/feed", async (req, res) => {
   try {
     const adoptId = req.body.currId;
+    const alreadyFeeded = await adoptedPokemons.findOne({
+      isFeeded:true
+    });
+    if (alreadyFeeded)
+    {
+       return res.status(409).send({ message: "Pokemon Already Feeded" });
+    }
+
     await adoptedPokemons.updateOne(
       { _id: adoptId },
       {
@@ -76,15 +96,6 @@ router.put("/feed", async (req, res) => {
     console.log(error);
   }
 })
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const data = await interview.findById(req.params.id);
-//     return res.json(data);
-//     // console.log(data);
-//   } catch (error) {
-//     console.log(error.msg);
-//   }
-// });
 
 // @route POST /pokemon
 // @description Add pokemon
@@ -98,6 +109,14 @@ router.post("/", async (req, res) => {
       breed,
       age,
     });
+
+    const pokemonName = await pokemon.findOne({
+      name:req.body.name
+    })
+    if (pokemonName)
+    {
+       return res.status(409).send({ message: "Pokemon Already Added" });
+    }
     console.log(newPokemon);
     await newPokemon.save();
 
@@ -109,10 +128,18 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+// @route POST pokemon/adopt
+// @description Adopt Pokemons
+// @acess PUBLIC
 router.post("/adopt", async (req, res) => {
   var { name, type, breed, age, healthStatus, uid } = req.body;
   try {
-    
+    const pokemonName= await adoptedPokemons.findOne({name: req.body.name});
+    if (pokemonName)
+    {
+      return res.status(409).send({ message: "Pokemon Already Adopted" });
+    }
     const newAdoptedPokemons = new adoptedPokemons({
       name,
       type,
@@ -120,7 +147,6 @@ router.post("/adopt", async (req, res) => {
       age,
       healthStatus,
     });
-    // console.log(newAdoptedPokemon);
     const result = await newAdoptedPokemons.save();
      await User.updateOne(
           { _id: uid },
@@ -132,7 +158,7 @@ router.post("/adopt", async (req, res) => {
         );
        
     console.log(result);
-    return res.json({ msg: "Data Saved succesfully" });
+    return res.json({ msg: "Pokemon Adopted Succesfully" });
     console.log("Pokemon Adopted Succesfully");
   } catch (error) {
     console.log(error);

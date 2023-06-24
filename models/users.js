@@ -20,8 +20,7 @@ const userSchema = new mongoose.Schema({
   pokemonList: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "pokemon",
-      unique : true,
+      ref: "AdoptedPokemon",
     },
   ],
 });
