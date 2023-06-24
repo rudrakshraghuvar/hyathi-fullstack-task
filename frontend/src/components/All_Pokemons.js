@@ -24,21 +24,21 @@ const AllPokemons = () => {
   //   console.log(error);
   // }
 
-//   const removeInt = async (id) => {
-//     const tempInt = interviews.filter((inter) => {
-//       return inter._id != id;
-//     });
-//     setinterviews([...tempInt]);
+  //   const removeInt = async (id) => {
+  //     const tempInt = interviews.filter((inter) => {
+  //       return inter._id != id;
+  //     });
+  //     setinterviews([...tempInt]);
 
-//     try {
-//       console.log("remove");
-//       await axios.put(`/interview/${id}`);
+  //     try {
+  //       console.log("remove");
+  //       await axios.put(`/interview/${id}`);
 
-//       // navigate("/");
-//     } catch (error) {
-//       console.log(error.msg);
-//     }
-//   };
+  //       // navigate("/");
+  //     } catch (error) {
+  //       console.log(error.msg);
+  //     }
+  //   };
 
   useEffect(() => {
     const user = localStorage.getItem("userInfo");
@@ -48,7 +48,7 @@ const AllPokemons = () => {
     }
     return async function getdata() {
       try {
-        const res = await axios.get("http://localhost:5000/pokemon");
+        const res = await axios.get("pokemon");
 
         if (res.data.length > 0) {
           setPokemons([...res.data]);
@@ -70,7 +70,7 @@ const AllPokemons = () => {
           <center>{/* <h3>Welcome {name}</h3> */}</center>
 
           {pokemons.map((item) => (
-            <Listitems item={item} key={item._id}  />
+            <Listitems item={item} key={item._id} />
           ))}
         </>
       ) : (

@@ -29,7 +29,7 @@ const Login = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth",
+        "/api/auth",
         formdata,
         config
       );

@@ -12,7 +12,7 @@ const fun = async () => {
   // feedStatus();
 }
 fun();
-cron.schedule('* * * * *', () => {
+cron.schedule('0 0 * * *', () => {
   console.log("helllo");
   feedStatus();
 });
