@@ -63,9 +63,9 @@ const MyListItem = ({ item }) => {
       <div className="column">
         <div className="card">
           <h3>{name} </h3>
-          <p>Pokoem Type : {type}</p>
+          <p>Pokemon Type : {type}</p>
           <p>Pokemon Breed : {breed}</p>
-          <p>Pokoem Age : {age}</p>
+          <p>Pokemon Age : {age}</p>
           <p>Pokemon Health Status : {healthStatus} </p>
           <button type="submit" onClick={HandleFeed}>
             Feed Me
