@@ -6,6 +6,7 @@ const userRoutes = require("./Routes/userRoutes");
 const feedStatus = require("./feedStatus");
 const cron = require("node-cron");
 const app = express();
+process.env["NODE_CONFIG_DIR"] = __dirname;
 const fun = async () => {
   await connectDB();
   // console.log("1234");
