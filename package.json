@@ -9,7 +9,7 @@
     "server": "nodemon server",
     "frontend": "npm start --prefix frontend",
     "dev": " concurrently \"npm run server\" \"npm run frontend\"",
-    "predeploy": "npm i && cd client && npm i && npm run build"
+    "predeploy": "npm i && cd frontend && npm i && npm run build"
   },
   "author": "Rudra Pratap Singh",
   "license": "ISC",
