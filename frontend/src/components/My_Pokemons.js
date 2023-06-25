@@ -25,22 +25,21 @@ const My_Pokemons = () => {
           uid,
         };
         // console.log(userdata);
-        const res = await axios.post("pokemon/myPokemons", userdata);
+        const res = await axios.post("/pokemon/myPokemons", userdata);
         console.log(res.data);
         console.log("hiiii");
         var temp = [];
-        for (var i = 0; i < res.data.length; i++)
-        {
+        for (var i = 0; i < res.data.length; i++) {
           const currId = res.data[i];
           const data = {
             currId,
           }
-          const result = await axios.post("pokemon/getMyPokemons", data);
+          const result = await axios.post("/pokemon/getMyPokemons", data);
           temp.push(result.data);
           // console.log(temp, result.data);
         }
         setPokemons(temp);
-        
+
         setisLoading(false);
       } catch (error) {
         console.log(error);

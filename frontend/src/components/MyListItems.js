@@ -48,7 +48,7 @@ const MyListItem = ({ item }) => {
         currId,
       };
       console.log(data);
-      const res = await axios.put("pokemon/feed", data);
+      const res = await axios.put("/pokemon/feed", data);
       alert("Pokemon feeded successfully");
     } catch (error) {
       console.log(error);

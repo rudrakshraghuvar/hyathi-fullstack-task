@@ -33,7 +33,7 @@ const Add_Pokemon = () => {
       age,
     };
     try {
-      await axios.post("pokemon", data);
+      await axios.post("/pokemon", data);
       alert("Pokemon Added Successfully");
       navigate("/");
     } catch (error) {
