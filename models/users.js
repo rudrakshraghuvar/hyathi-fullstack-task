@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 // const joi = require("joi");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const privateKey = require('../keys');
 // const passwordComplexity = require("joi-password-complexity");
 const userSchema = new mongoose.Schema({
   name: {
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.PRIVATE_KEY, {
+  const token = jwt.sign({ _id: this._id }, privateKey.PRIVATE_KEY, {
     expiresIn: "7d",
   });
   return token;
