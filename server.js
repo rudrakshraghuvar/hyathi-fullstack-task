@@ -14,7 +14,7 @@ const fun = async () => {
 }
 fun();
 cron.schedule('0 0 * * *', () => {
-  console.log("helllo");
+  console.log("hello");
   feedStatus();
 });
 // cron.start();

@@ -11,34 +11,6 @@ const AllPokemons = () => {
   const [pokemons, setPokemons] = useState([]);
   const [isloggedIn, setisloggedIn] = useState(false);
   const navigate = useNavigate();
-  // const navigate = useNavigate();
-  // try {
-  //   const data = localStorage.getItem("userInfo");
-  //   if (!data) <Navigate to="/login" />;
-  //   else {
-  //     const newdata = JSON.parse(data);
-  //     const name = newdata.name;
-  //     console.log(name);
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
-  //   const removeInt = async (id) => {
-  //     const tempInt = interviews.filter((inter) => {
-  //       return inter._id != id;
-  //     });
-  //     setinterviews([...tempInt]);
-
-  //     try {
-  //       console.log("remove");
-  //       await axios.put(`/interview/${id}`);
-
-  //       // navigate("/");
-  //     } catch (error) {
-  //       console.log(error.msg);
-  //     }
-  //   };
 
   useEffect(() => {
     const user = localStorage.getItem("userInfo");
