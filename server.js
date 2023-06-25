@@ -24,6 +24,17 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoute);
 app.use("/pokemon", require("./Routes/pokemonRoutes"));
-app.listen(5000, () => {
-  console.log("Server is Running");
-});
+
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('frontend/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
