@@ -20,7 +20,7 @@ const Signup = () => {
       console.log(formdata);
       if (name && email && password) {
         await axios.post(
-          "/api/users",
+          "https://pokemon-adoption-feed-app.onrender.com/api/users",
           formdata,
           {
             headers: {

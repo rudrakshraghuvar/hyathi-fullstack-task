@@ -25,7 +25,7 @@ const My_Pokemons = () => {
           uid,
         };
         // console.log(userdata);
-        const res = await axios.post("/pokemon/myPokemons", userdata);
+        const res = await axios.post("https://pokemon-adoption-feed-app.onrender.com/pokemon/myPokemons", userdata);
         console.log(res.data);
         console.log("hiiii");
         var temp = [];
@@ -34,7 +34,7 @@ const My_Pokemons = () => {
           const data = {
             currId,
           }
-          const result = await axios.post("/pokemon/getMyPokemons", data);
+          const result = await axios.post("https://pokemon-adoption-feed-app.onrender.com/pokemon/getMyPokemons", data);
           temp.push(result.data);
           // console.log(temp, result.data);
         }

@@ -55,7 +55,7 @@ const Listitems = ({ item }) => {
         uid,
       };
       // console.log(data);
-      const res = await axios.post("/pokemon/adopt", data);
+      const res = await axios.post("https://pokemon-adoption-feed-app.onrender.com/pokemon/adopt", data);
       alert("Pokemon adopted successfully");
     } catch (error) {
       console.log(error);

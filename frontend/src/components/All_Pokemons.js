@@ -20,7 +20,7 @@ const AllPokemons = () => {
     }
     return async function getdata() {
       try {
-        const res = await axios.get("/pokemon");
+        const res = await axios.get("https://pokemon-adoption-feed-app.onrender.com/pokemon");
 
         if (res.data.length > 0) {
           setPokemons([...res.data]);

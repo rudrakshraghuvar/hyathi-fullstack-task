@@ -29,7 +29,7 @@ const Login = () => {
       };
 
       const res = await axios.post(
-        "/api/auth",
+        "https://pokemon-adoption-feed-app.onrender.com/api/auth",
         formdata,
         config
       );
