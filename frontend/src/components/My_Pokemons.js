@@ -16,7 +16,7 @@ const My_Pokemons = () => {
     if (!user) {
       navigate("/login");
     }
-    return async function getdata() {
+    async function getdata() {
       try {
         const data = localStorage.getItem("userInfo");
         const jData = JSON.parse(data);
@@ -44,7 +44,8 @@ const My_Pokemons = () => {
       } catch (error) {
         console.log(error);
       }
-    };
+    }
+    getdata();
     console.log(pokemons);
   }, []);
 
