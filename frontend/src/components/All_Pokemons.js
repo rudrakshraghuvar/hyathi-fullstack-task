@@ -18,7 +18,7 @@ const AllPokemons = () => {
     if (!user) {
       navigate("/login");
     }
-    return async function getdata() {
+    async function getdata() {
       try {
         const res = await axios.get("https://pokemon-adoption-feed-app.onrender.com/pokemon");
         console.log(res);
@@ -30,7 +30,8 @@ const AllPokemons = () => {
         console.log(error);
         alert(`${error.response.data.message}`);
       }
-    };
+    }
+    getdata();
     console.log(pokemons);
   }, []);
 
