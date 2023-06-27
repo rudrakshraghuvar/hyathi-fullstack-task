@@ -76,7 +76,7 @@ router.put("/feed", async (req, res) => {
   try {
     const adoptId = req.body.currId;
     const alreadyFeeded = await adoptedPokemons.findOne({
-      isFeeded:true
+      $and:[{_id: adoptId},{isFeeded:true}]
     });
     if (alreadyFeeded)
     {
@@ -135,17 +135,21 @@ router.post("/", async (req, res) => {
 router.post("/adopt", async (req, res) => {
   var { name, type, breed, age, healthStatus, uid } = req.body;
   try {
-    const pokemonName= await adoptedPokemons.findOne({name: req.body.name});
+    // console.log(req.body.uid);
+    const pokemonName= await adoptedPokemons.findOne(
+      {$and: [{name: req.body.name},{owner: req.body.uid}]});
     if (pokemonName)
     {
       return res.status(409).send({ message: "Pokemon Already Adopted" });
     }
+    const owner = req.body.uid;
     const newAdoptedPokemons = new adoptedPokemons({
       name,
       type,
       breed,
       age,
       healthStatus,
+      owner,
     });
     const result = await newAdoptedPokemons.save();
      await User.updateOne(

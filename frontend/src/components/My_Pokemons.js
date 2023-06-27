@@ -39,7 +39,6 @@ const My_Pokemons = () => {
           // console.log(temp, result.data);
         }
         setPokemons(temp);
-
         setisLoading(false);
       } catch (error) {
         console.log(error);

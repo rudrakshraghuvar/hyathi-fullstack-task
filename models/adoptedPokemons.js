@@ -25,6 +25,10 @@ const AdoptedPokemonSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
+  },
 });
 
 module.exports = AdoptedPokemon = mongoose.model(
