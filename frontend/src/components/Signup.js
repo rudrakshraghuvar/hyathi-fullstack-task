@@ -40,8 +40,8 @@ const Signup = () => {
   return (
     <div className="box">
       <div className="signup-form">
-        <div className="left">
-          <h1 className="left_h1" >Pokemon Adoption App</h1>
+        <div className="lright">
+          <h2>Pokemon Adoption App</h2>
           <Link to="/login">
             <button type="button" className="reg_btn">
               Login
